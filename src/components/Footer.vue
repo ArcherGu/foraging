@@ -8,17 +8,32 @@
         items="center"
         grid="cols-2"
     >
-        <button class="round-btn" shadow="xl" justify="self-start" bg="blue-400">
-            <mdi-plus class="align-text-bottom" />
-        </button>
+        <div justify="self-start" position="flex">
+            <button class="round-btn small-btn" bg="blue-400" @click="emit('random')">
+                <fa-solid-dice />
+            </button>
 
-        <button class="round-btn" shadow="xl" justify="self-end" bg="green-400">
+            <a
+                class="round-btn small-btn"
+                bg="dark-100"
+                href="https://github.com/ArcherGu/foraging"
+                target="_blank"
+                m="l-2"
+            >
+                <uil-github-alt />
+            </a>
+        </div>
+
+        <button class="round-btn" justify="self-end" bg="green-400">
             <mdi-plus class="align-text-bottom" />
         </button>
     </div>
 </template>
 
 <script setup lang="ts">
+import { defineEmit } from "vue";
+
+const emit = defineEmit(['random']);
 </script>
 
 <style>

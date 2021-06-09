@@ -8,12 +8,18 @@
             w="xs sm:sm md:md lg:lg xl:xl"
             shadow="xl"
         >
+            <span text="4xl">{{ props.plan }}</span>
             <PlanCardCtrl position="absolute bottom-10 right-0" />
         </div>
     </div>
 </template>
 
 <script setup lang="ts">
+import { defineProps } from "vue";
+const props = defineProps({
+    plan: String
+});
+
 </script>
 
 <style>

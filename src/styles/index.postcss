@@ -33,7 +33,7 @@ button:focus {
 }
 
 .round-btn {
-  @apply h-12 w-12 rounded-1/2 text-white text-4xl;
+  @apply h-15 w-15 rounded-1/2 text-white text-4xl flex items-center justify-center;
   box-shadow: 0 3px 5px -1px rgb(0 0 0 / 20%), 0 6px 10px 0 rgb(0 0 0 / 14%),
     0 1px 18px 0 rgb(0 0 0 / 12%);
 }
@@ -41,4 +41,8 @@ button:focus {
 .round-btn:active {
   box-shadow: 0 7px 8px -4px rgb(0 0 0 / 20%), 0 12px 17px 2px rgb(0 0 0 / 14%),
     0 5px 22px 4px rgb(0 0 0 / 12%);
+}
+
+.round-btn.small-btn {
+  @apply h-10 w-10 text-2xl;
 }
