@@ -24,14 +24,24 @@
             </a>
         </div>
 
-        <button class="round-btn" justify="self-end" bg="green-400">
-            <mdi-plus class="align-text-bottom" />
+        <button class="round-btn" justify="self-end" bg="green-400" position="relative">
+            <ph-arrow-fat-down
+                v-if="isEmpty"
+                position="absolute -top-24"
+                text="7xl"
+                class="transform rotate-45 animate-bounce"
+            />
+            <mdi-plus />
         </button>
     </div>
 </template>
 
 <script setup lang="ts">
-import { defineEmit } from "vue";
+import { defineProps, defineEmit } from "vue";
+
+const props = defineProps({
+    isEmpty: Boolean
+});
 
 const emit = defineEmit(['random']);
 </script>
