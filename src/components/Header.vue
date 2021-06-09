@@ -4,7 +4,7 @@
         position="fixed top-0 left-0 right-0 flex"
         :h="height"
         bg="purple-500"
-        z="1"
+        z="99"
         items="center"
         justify="center"
     >

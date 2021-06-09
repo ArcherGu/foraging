@@ -1,13 +1,15 @@
 <template>
-    <div h="full" p="y-20">
+    <div h="full">
         <div
             class="plan-card"
             bg="light-200"
-            border="rounded-3xl"
+            border="1 rounded-3xl"
             h="full"
             w="xs sm:sm md:md lg:lg xl:xl"
             shadow="xl"
-        ></div>
+        >
+            <PlanCardCtrl position="absolute bottom-10 right-0" />
+        </div>
     </div>
 </template>
 
@@ -17,5 +19,6 @@
 <style>
 .plan-card {
     max-width: 74ch;
+    transition: all 0.3s ease-in-out;
 }
 </style>

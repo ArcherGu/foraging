@@ -15,26 +15,6 @@
 
 <body>
     <div id="app"></div>
-    <script>
-        window.onload = function () {
-            document.documentElement.addEventListener('touchstart', function (event) {
-                if (event.touches.length > 1) {
-                    event.preventDefault();
-                }
-            }, false);
-            var lastTouchEnd = 0;
-            document.addEventListener('touchend', function (event) {
-                var now = Date.now();
-                if (now - lastTouchEnd <= 300) {
-                    event.preventDefault();
-                }
-                lastTouchEnd = now;
-            }, false); // 阻止双指放大
-            document.addEventListener('gesturestart', function (event) {
-                event.preventDefault();
-            });
-        }
-    </script>
     <script type="module" src="/src/main.ts"></script>
 </body>
 

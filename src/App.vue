@@ -2,7 +2,7 @@
     <main h="full">
         <Header />
 
-        <div class="swiper-container" h="full" ref="mySwiper">
+        <div class="swiper-container" h="full" ref="mySwiper" p="y-20">
             <div class="swiper-wrapper">
                 <div class="swiper-slide">
                     <PlanCard />
