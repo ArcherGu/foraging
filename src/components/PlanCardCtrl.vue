@@ -26,7 +26,7 @@
 
         <button
             v-show="isCtrlShow"
-            @click="emit('edit')"
+            @click="editPlan"
             h="full"
             position="flex"
             items="center"
@@ -67,6 +67,11 @@ const showCtrl = async () => {
         await promiseTimeout(5000);
         isCtrlShow.value = false;
     }
+}
+
+const editPlan = () => {
+    isCtrlShow.value = false;
+    emit('edit');
 }
 
 </script>

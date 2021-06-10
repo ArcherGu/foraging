@@ -9,12 +9,12 @@
         grid="cols-2"
     >
         <div justify="self-start" position="flex">
-            <button class="round-btn small-btn" bg="blue-400" @click="emit('random')">
+            <button class="btn round-btn sm-btn" bg="blue-400" @click="emit('random')">
                 <fa-solid-dice />
             </button>
 
             <a
-                class="round-btn small-btn"
+                class="btn round-btn sm-btn"
                 bg="dark-100"
                 href="https://github.com/ArcherGu/foraging"
                 target="_blank"
@@ -25,7 +25,7 @@
         </div>
 
         <button
-            class="round-btn"
+            class="btn round-btn"
             justify="self-end"
             bg="green-400"
             position="relative"

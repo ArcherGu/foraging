@@ -13,7 +13,7 @@
                     mode="out-in"
                 >
                     <div v-for="plan in planList" class="swiper-slide" :key="plan.id">
-                        <PlanCard :plan="plan" @delete="deletePlan" />
+                        <PlanCard :plan="plan" @delete="deletePlan" @save="savePlan" />
                     </div>
                 </transition-group>
             </div>
@@ -30,6 +30,7 @@ import random from 'random';
 import { v4 as uuidv4 } from 'uuid';
 import { usePlanList } from './composition/usePlanList';
 import { useSwiper } from './composition/useSwiper';
+import type { Plan } from './types';
 
 const mySwiper = ref();
 let swiper: Swiper;
@@ -55,10 +56,9 @@ const isEmpty = computed(() => planList.value.length === 0);
 const addPlan = () => {
     planList.value.unshift({
         id: uuidv4(),
-        name: uuidv4()
+        name: "",
+        item: []
     });
-
-    save();
 }
 
 const deletePlan = (id: string) => {
@@ -67,6 +67,13 @@ const deletePlan = (id: string) => {
         swiper.removeSlide(index);
         planList.value.splice(index, 1);
     }
+
+    save();
+}
+
+const savePlan = (plan: Plan) => {
+    const index = planList.value.findIndex(e => e.id === plan.id);
+    planList.value.splice(index, 1, plan);
 
     save();
 }
