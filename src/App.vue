@@ -24,7 +24,7 @@
 </template>
 
 <script setup lang="ts">
-import Swiper from 'swiper';
+import { Swiper } from 'swiper';
 import { computed, nextTick, ref } from 'vue';
 import random from 'random';
 import { v4 as uuidv4 } from 'uuid';

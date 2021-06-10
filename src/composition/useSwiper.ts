@@ -1,7 +1,12 @@
 import { MaybeElementRef, tryOnUnmounted, unrefElement, useEventListener } from '@vueuse/core';
-import Swiper from 'swiper';
+import { Swiper } from 'swiper';
 import type { SwiperOptions } from 'swiper';
 import { watch } from 'vue';
+// Import Swiper and modules
+import SwiperCore, { Autoplay } from 'swiper/core';
+
+// Install modules
+SwiperCore.use([Autoplay]);
 
 type Callback = (swiper: Swiper) => any;
 

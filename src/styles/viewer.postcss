@@ -1,1 +1,30 @@
+.random-swiper {
+  @apply border-4 rounded-3xl;
+  height: 9rem;
+}
 
+.random-swiper:before {
+  @apply border-t-4  border-b-4;
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 3rem;
+  top: calc(3rem + 8px);
+}
+
+.random-swiper .swiper-slide {
+  height: 3rem;
+}
+
+.spinner {
+  animation: rotate 3s linear infinite;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

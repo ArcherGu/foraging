@@ -1,5 +1,5 @@
 <template>
-    <div class="plan-editor" h="full" w="full" p="6" position="relative">
+    <div class="plan-editor" h="full" w="full" p="6">
         <div class="form-item">
             <label class="form-item__label">Plan Name :</label>
             <div class="form-item__content">
