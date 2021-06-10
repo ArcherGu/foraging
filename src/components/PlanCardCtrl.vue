@@ -1,5 +1,6 @@
 <template>
     <div
+        ref="myCtrl"
         class="plan-card-ctrl flex"
         :w="isCtrlShow ? '30' : '10'"
         bg="light-200"
@@ -10,55 +11,64 @@
         text="2xl"
         overflow="hidden"
     >
-        <div
+        <button
             @click="showCtrl"
             h="full"
             position="flex"
             items="center"
             w="10"
             justify="center"
-            cursor="pointer"
             border="rounded-1/2"
         >
             <uil-setting text="gray-400" v-show="!isCtrlShow" />
             <uil-times text="gray-400" v-show="isCtrlShow" />
-        </div>
+        </button>
 
-        <div
+        <button
             v-show="isCtrlShow"
+            @click="emit('edit')"
             h="full"
             position="flex"
             items="center"
             w="10"
             justify="center"
-            cursor="pointer"
             border="rounded-1/2"
         >
             <uil-edit-alt text="blue-400" />
-        </div>
+        </button>
 
-        <div
+        <button
             v-show="isCtrlShow"
+            @click="emit('delete')"
             h="full"
             position="flex"
             items="center"
             w="10"
             justify="center"
-            cursor="pointer"
             border="rounded-1/2"
         >
             <uil-trash-alt text="red-400" />
-        </div>
+        </button>
     </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { promiseTimeout } from "@vueuse/core";
+import { ref, defineEmit } from "vue";
+const myCtrl = ref();
+
 const isCtrlShow = ref(false)
 
-const showCtrl = () => {
-    isCtrlShow.value = !isCtrlShow.value
+const emit = defineEmit(['delete', 'edit']);
+
+const showCtrl = async () => {
+    isCtrlShow.value = !isCtrlShow.value;
+    if (isCtrlShow.value) {
+        await promiseTimeout(5000);
+        isCtrlShow.value = false;
+    }
 }
+
 </script>
 
 <style>

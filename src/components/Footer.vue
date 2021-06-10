@@ -24,7 +24,13 @@
             </a>
         </div>
 
-        <button class="round-btn" justify="self-end" bg="green-400" position="relative">
+        <button
+            class="round-btn"
+            justify="self-end"
+            bg="green-400"
+            position="relative"
+            @click="emit('add')"
+        >
             <ph-arrow-fat-down
                 v-if="isEmpty"
                 position="absolute -top-24"
@@ -43,7 +49,7 @@ const props = defineProps({
     isEmpty: Boolean
 });
 
-const emit = defineEmit(['random']);
+const emit = defineEmit(['random', "add"]);
 </script>
 
 <style>

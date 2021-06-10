@@ -6,52 +6,74 @@
 
         <div v-else class="swiper-container" h="full" ref="mySwiper" p="y-20">
             <div class="swiper-wrapper">
-                <div v-for="plan in planList" class="swiper-slide">
-                    <PlanCard :plan="plan" />
-                </div>
+                <transition-group
+                    name="fade"
+                    enter-active-class="animate__animated animate__fadeInUpBig"
+                    leave-active-class="animate__animated animate__fadeOutDownBig"
+                    mode="out-in"
+                >
+                    <div v-for="plan in planList" class="swiper-slide" :key="plan.id">
+                        <PlanCard :plan="plan" @delete="deletePlan" />
+                    </div>
+                </transition-group>
             </div>
         </div>
 
-        <Footer @random="getRandomPlan" :isEmpty="isEmpty" />
+        <Footer @random="getRandomPlan" @add="addPlan" :isEmpty="isEmpty" />
     </main>
 </template>
 
 <script setup lang="ts">
 import Swiper from 'swiper';
-import { computed, ref, watch } from 'vue';
+import { computed, nextTick, ref } from 'vue';
 import random from 'random';
-import { unrefElement, promiseTimeout } from "@vueuse/core";
+import { v4 as uuidv4 } from 'uuid';
+import { usePlanList } from './composition/usePlanList';
+import { useSwiper } from './composition/useSwiper';
 
-// const planList = ["1", "2", "3", "4", "5", "6"];
-
-const isEmpty = computed(() => planList.length === 0);
-
-const planList: any[] = [];
 const mySwiper = ref();
 let swiper: Swiper;
 
-watch(
-    mySwiper,
-    async () => {
-        const el = unrefElement(mySwiper);
-        if (!el) return;
+useSwiper(mySwiper, {
+    slidesPerView: 'auto',
+    centeredSlides: true,
+    spaceBetween: 30,
+    init: false
+}, (newSwiper) => {
+    swiper = newSwiper;
+    swiper.init();
+});
 
-        swiper = new Swiper(el, {
-            loop: true,
-            slidesPerView: 'auto',
-            centeredSlides: true,
-            spaceBetween: 30,
-            init: false
-        });
+const { planList, save } = usePlanList(async () => {
+    await nextTick();
+    swiper?.update();
+    swiper?.slideTo(0, 1000);
+});
 
-        await promiseTimeout(500);
-        swiper.init();
+const isEmpty = computed(() => planList.value.length === 0);
+
+const addPlan = () => {
+    planList.value.unshift({
+        id: uuidv4(),
+        name: uuidv4()
+    });
+
+    save();
+}
+
+const deletePlan = (id: string) => {
+    const index = planList.value.findIndex(e => e.id === id);
+    if (index > -1) {
+        swiper.removeSlide(index);
+        planList.value.splice(index, 1);
     }
-)
+
+    save();
+}
 
 const getRandomPlan = () => {
-    if (!swiper || planList.length === 0) return;
-    const randomIndex = random.int(0, planList.length - 1);
+    if (!swiper || planList.value.length === 0) return;
+    const randomIndex = random.int(0, planList.value.length - 1);
     swiper.slideTo(randomIndex, 1000);
 }
 
