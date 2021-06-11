@@ -8,7 +8,7 @@
         items="center"
         justify="center"
     >
-        <img src="/logo.png" h="12" w="12" />
+        <Logo h="12" w="12" />
         <span text="4xl white" p="l-3">Foraging</span>
     </div>
 </template>
