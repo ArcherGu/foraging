@@ -33,6 +33,9 @@ import { useSwiper } from './composition/useSwiper';
 import type { Plan } from './types';
 import { promiseTimeout } from "@vueuse/core";
 import { registerSW } from 'virtual:pwa-register';
+onMounted(() => {
+    registerSW();
+});
 
 const mySwiper = ref();
 let swiper: Swiper;
@@ -45,7 +48,7 @@ useSwiper(mySwiper, {
     init: false
 }, async (newSwiper) => {
     isSwiperInit.value = false;
-    await promiseTimeout(100);
+    await promiseTimeout(500);
     swiper = newSwiper;
     swiper.init();
     isSwiperInit.value = true;
@@ -90,9 +93,6 @@ const getRandomPlan = () => {
     swiper.slideTo(randomIndex, 1000);
 }
 
-onMounted(() => {
-    registerSW();
-});
 </script>
 
 <style>

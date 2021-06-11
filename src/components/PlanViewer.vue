@@ -74,7 +74,7 @@ useSwiper(randomSwiper, {
     },
     init: false
 }, async (newSwiper) => {
-    await promiseTimeout(100);
+    await promiseTimeout(500);
     swiper = newSwiper;
     swiper.init();
     swiper.autoplay.stop();
