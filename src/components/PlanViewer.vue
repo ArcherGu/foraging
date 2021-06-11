@@ -12,7 +12,7 @@
             </div>
 
             <div>
-                <div :text="`4xl ${planNameColor}`">{{ plan.name }}</div>
+                <div text="4xl" :style="`color: ${planNameColor}`">{{ plan.name }}</div>
                 <div text="md gray-400 center">{{ plan.type }}</div>
             </div>
 
@@ -118,25 +118,25 @@ watch(
 )
 
 const planNameColor = computed(() => {
-    let color = "cyan-500";
+    let color = "#06b6d4";
     switch (props.plan.type) {
         case 'Breakfast':
-            color = "teal-500"
+            color = "#14b8a6"
             break;
         case 'Lunch':
-            color = "yellow-500"
+            color = "#eab308"
             break;
         case 'Dinner':
-            color = "pink-500"
+            color = "#ec4899"
             break;
         case 'Afternoon Tea':
-            color = "lime-500"
+            color = "#84cc16"
             break;
         case 'Supper':
-            color = "red-500"
+            color = "#ef4444"
             break;
         case 'Dessert':
-            color = "fuchsia-500"
+            color = "#d946ef"
             break;
         default:
             break;
