@@ -5,6 +5,9 @@ import './styles/index.postcss';
 import { createApp } from 'vue';
 import App from './App.vue';
 import setupAnimate from './plugins/animate';
+import { registerSW } from 'virtual:pwa-register';
+
+registerSW();
 
 const app = createApp(App);
 
