@@ -2,9 +2,21 @@
     <img width="200" src="https://foraging.netlify.app/pwa-300x300.png" alt="logo" style="border-radius: 1.5rem;">
 </p>
 
-# Foraging 🐺
+# Foraging [ 觅食 ] 🐺
 
-Where to eat !
+Where are we going to have lunch today? 😥
+
+## Motivation
+
+Our company does not provide us with a restaurant, so we eat lunch in restaurants in the surrounding streets at noon every day. What follows is the difficulty of choice, and we have to spend some time to make this difficult decision...
+
+Now, this choice is left to [Foraging](https://foraging.netlify.app/) !
+
+## Screenshots
+
+<img width="200" src="https://foraging.netlify.app/Screenshots_1.png">
+
+<img width="200" src="https://foraging.netlify.app/Screenshots_2.png">
 
 ## License
 

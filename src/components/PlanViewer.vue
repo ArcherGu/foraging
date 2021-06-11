@@ -1,7 +1,7 @@
 <template>
     <div class="plan-viewer" h="full" w="full" p="6">
         <div h="1/4" position="flex" items="center">
-            <div text="5xl" m="r-4">
+            <div text="5xl" m="r-2">
                 <noto-v1-bread v-if="plan.type === 'Breakfast'" />
                 <noto-v1-hamburger v-else-if="plan.type === 'Lunch'" />
                 <noto-v1-curry-rice v-else-if="plan.type === 'Dinner'" />
