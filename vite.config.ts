@@ -29,7 +29,7 @@ export default defineConfig({
             manifest: {
                 name: 'Foraging',
                 short_name: 'Foraging',
-                theme_color: '#ffffff',
+                theme_color: '#8b5cf6',
                 icons: [
                     {
                         src: '/pwa-250x250.png',
