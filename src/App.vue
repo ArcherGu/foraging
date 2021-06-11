@@ -5,7 +5,7 @@
         <Empty v-if="planList.length === 0" p="x-5" />
 
         <div v-else class="swiper-container" h="full" ref="mySwiper" p="y-20">
-            <div class="swiper-wrapper">
+            <div class="swiper-wrapper" :justify="isSwiperInit ? '' : 'center'">
                 <transition-group
                     name="fade"
                     enter-active-class="animate__animated animate__fadeInUpBig"
@@ -31,18 +31,23 @@ import { v4 as uuidv4 } from 'uuid';
 import { usePlanList } from './composition/usePlanList';
 import { useSwiper } from './composition/useSwiper';
 import type { Plan } from './types';
+import { promiseTimeout } from "@vueuse/core";
 
 const mySwiper = ref();
 let swiper: Swiper;
+const isSwiperInit = ref(false);
 
 useSwiper(mySwiper, {
     slidesPerView: 'auto',
     centeredSlides: true,
     spaceBetween: 30,
     init: false
-}, (newSwiper) => {
+}, async (newSwiper) => {
+    isSwiperInit.value = false;
+    await promiseTimeout(100);
     swiper = newSwiper;
     swiper.init();
+    isSwiperInit.value = true;
 });
 
 const { planList, save } = usePlanList(async () => {

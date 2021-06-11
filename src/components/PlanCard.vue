@@ -8,23 +8,30 @@
             w="xs sm:sm md:md lg:lg xl:xl"
             shadow="xl"
         >
-            <PlanEditor
-                v-if="isEdit"
-                :plan="plan"
-                @delete="deletePlan"
-                @cancel="cancelEdit"
-                @confirm="confirmEdit"
-            />
-
-            <template v-else>
-                <PlanViewer :plan="plan" />
-
-                <PlanCardCtrl
-                    position="absolute bottom-10 right-0"
+            <transition-group
+                name="fade"
+                enter-active-class="animate__animated animate__fadeIn"
+                leave-active-class="animate__animated animate__fadeOut"
+                mode="out-in"
+            >
+                <PlanEditor
+                    v-if="isEdit"
+                    :plan="plan"
                     @delete="deletePlan"
-                    @edit="editPlan"
+                    @cancel="cancelEdit"
+                    @confirm="confirmEdit"
                 />
-            </template>
+
+                <template v-else>
+                    <PlanViewer :plan="plan" />
+
+                    <PlanCardCtrl
+                        position="absolute bottom-10 right-0"
+                        @delete="deletePlan"
+                        @edit="editPlan"
+                    />
+                </template>
+            </transition-group>
         </div>
     </div>
 </template>

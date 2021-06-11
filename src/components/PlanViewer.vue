@@ -24,7 +24,7 @@
 import random from "random";
 import { Swiper } from "swiper";
 import type { PropType } from "vue";
-import { defineProps, ref, computed } from "vue";
+import { defineProps, ref } from "vue";
 import { useSwiper } from "../composition/useSwiper";
 import type { Plan } from "../types";
 import { promiseTimeout } from "@vueuse/core";
@@ -47,9 +47,12 @@ useSwiper(randomSwiper, {
     autoplay: {
         delay: 50,
         disableOnInteraction: false,
-    }
-}, (newSwiper) => {
+    },
+    init: false
+}, async (newSwiper) => {
+    await promiseTimeout(100);
     swiper = newSwiper;
+    swiper.init();
     swiper.autoplay.stop();
 });
 
@@ -63,7 +66,7 @@ const randomIt = async () => {
 
     swiper.autoplay.start();
 
-    const randomTime = random.int(10, 20);
+    const randomTime = random.int(5, 10);
 
     await promiseTimeout(randomTime * 1000)
 
