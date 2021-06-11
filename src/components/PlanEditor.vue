@@ -15,9 +15,22 @@
             </div>
         </div>
 
-        <div class="form-item" h="3/5">
+        <div class="form-item">
+            <label class="form-item__label">Type :</label>
+            <div class="form-item__content type">
+                <div class="select">
+                    <select v-model="planCopy.type" class="select__inner">
+                        <option v-for="option in typeOptions" :value="option">{{ option }}</option>
+                    </select>
+
+                    <uil-angle-down class="select_arrow" />
+                </div>
+            </div>
+        </div>
+
+        <div class="form-item" h="1/2">
             <label class="form-item__label">List :</label>
-            <div max="h-10/12" overflow="x-auto" ref="itemListRef">
+            <div max="h-8/12" overflow="x-auto" ref="itemListRef">
                 <div
                     class="form-item__content list"
                     v-for="(item, index) in planCopy.item"
@@ -61,7 +74,7 @@
             w="full"
             items="center"
             justify="center"
-            m="t-15"
+            m="t-10"
         >
             <button
                 class="btn round-btn sm-btn no-shadow"
@@ -94,6 +107,16 @@ const props = defineProps({
 });
 
 const emit = defineEmit(['delete', 'cancel', 'confirm']);
+
+const typeOptions = [
+    'Breakfast',
+    'Lunch',
+    'Dinner',
+    'Afternoon Tea',
+    'Supper',
+    'Dessert',
+    'Other'
+]
 
 let planCopy: Plan;
 const isNew = ref(false);

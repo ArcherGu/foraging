@@ -13,7 +13,8 @@
     "sweetalert2": "^11.0.16",
     "swiper": "^6.7.0",
     "uuid": "^8.3.2",
-    "vue": "^3.0.5"
+    "vue": "^3.0.5",
+    "vue-multiselect": "^3.0.0-alpha.2"
   },
   "devDependencies": {
     "@iconify/json": "^1.1.354",

@@ -1,6 +1,27 @@
 <template>
     <div class="plan-viewer" h="full" w="full" p="6">
-        <div text="5xl" m="10">{{ plan.name }}</div>
+        <div h="1/4" position="flex" items="center">
+            <div text="5xl" m="r-4">
+                <noto-v1-bread v-if="plan.type === 'Breakfast'" />
+                <noto-v1-hamburger v-else-if="plan.type === 'Lunch'" />
+                <noto-v1-curry-rice v-else-if="plan.type === 'Dinner'" />
+                <noto-v1-teacup-without-handle v-else-if="plan.type === 'Afternoon Tea'" />
+                <noto-v1-popcorn v-else-if="plan.type === 'Supper'" />
+                <noto-v1-shortcake v-else-if="plan.type === 'Dessert'" />
+                <noto-v1-shallow-pan-of-food v-else />
+            </div>
+
+            <div>
+                <div :text="`4xl ${planNameColor}`">{{ plan.name }}</div>
+                <div text="md gray-400 center">{{ plan.type }}</div>
+            </div>
+
+            <div m="l-auto">
+                <span text="5xl violet-400 center">{{ plan.item.length }}</span>
+
+                <span text="lg gray-400" m="l-1">items</span>
+            </div>
+        </div>
 
         <div class="swiper-container random-swiper" ref="randomSwiper" p="y-20" position="relative">
             <div class="swiper-wrapper">
@@ -10,7 +31,7 @@
             </div>
         </div>
 
-        <div position="flex" items="center" justify="center" w="full" m="t-10">
+        <div class="random-ctrl" position="flex" items="center" justify="center" w="full">
             <button class="btn" bg="purple-500" @click="randomIt" :disabled="isRunning">
                 <ph-play-bold v-show="!isRunning" />
 
@@ -24,10 +45,11 @@
 import random from "random";
 import { Swiper } from "swiper";
 import type { PropType } from "vue";
-import { defineProps, ref } from "vue";
+import { defineProps, defineEmit, ref, watch, computed } from "vue";
 import { useSwiper } from "../composition/useSwiper";
 import type { Plan } from "../types";
 import { promiseTimeout } from "@vueuse/core";
+import Swal from 'sweetalert2';
 
 const props = defineProps({
     plan: {
@@ -35,6 +57,8 @@ const props = defineProps({
         required: true
     }
 });
+
+const emit = defineEmit(['running'])
 
 const randomSwiper = ref();
 let swiper: Swiper;
@@ -73,7 +97,53 @@ const randomIt = async () => {
     swiper.autoplay.stop();
 
     isRunning.value = false;
+
+    const index = swiper.activeIndex % props.plan.item.length;
+    const chosedItem = props.plan.item[index];
+
+    return Swal.fire({
+        title: chosedItem.name + " 🎉",
+        text: props.plan.name,
+        icon: 'success',
+        showCancelButton: false,
+        confirmButtonText: 'OK',
+    });
 }
+
+watch(
+    isRunning,
+    () => {
+        emit('running', isRunning.value)
+    }
+)
+
+const planNameColor = computed(() => {
+    let color = "cyan-500";
+    switch (props.plan.type) {
+        case 'Breakfast':
+            color = "teal-500"
+            break;
+        case 'Lunch':
+            color = "yellow-500"
+            break;
+        case 'Dinner':
+            color = "pink-500"
+            break;
+        case 'Afternoon Tea':
+            color = "lime-500"
+            break;
+        case 'Supper':
+            color = "red-500"
+            break;
+        case 'Dessert':
+            color = "fuchsia-500"
+            break;
+        default:
+            break;
+    }
+
+    return color;
+});
 
 </script>
 

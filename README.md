@@ -1,5 +1,5 @@
 <p align="center">
-    <img width="200" src="./public/pwa-300x300.png" alt="logo" style="border-radius: 1.5rem;">
+    <img width="200" src="https://foraging.netlify.app/pwa-300x300.png" alt="logo" style="border-radius: 1.5rem;">
 </p>
 
 # Foraging 🐺

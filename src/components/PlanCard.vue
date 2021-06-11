@@ -17,20 +17,22 @@
                 <PlanEditor
                     v-if="isEdit"
                     :plan="plan"
+                    key="editor"
                     @delete="deletePlan"
                     @cancel="cancelEdit"
                     @confirm="confirmEdit"
                 />
 
-                <template v-else>
-                    <PlanViewer :plan="plan" />
+                <div v-else key="viewer" h="full" w="full">
+                    <PlanViewer :plan="plan" @running="setRunning" />
 
                     <PlanCardCtrl
+                        v-show="!isRunning"
                         position="absolute bottom-10 right-0"
                         @delete="deletePlan"
                         @edit="editPlan"
                     />
-                </template>
+                </div>
             </transition-group>
         </div>
     </div>
@@ -94,6 +96,11 @@ const cancelEdit = () => {
 const confirmEdit = (newPlan: Plan) => {
     emit('save', newPlan);
     isEdit.value = false;
+}
+
+const isRunning = ref(false);
+const setRunning = (v: boolean) => {
+    isRunning.value = v;
 }
 </script>
 
