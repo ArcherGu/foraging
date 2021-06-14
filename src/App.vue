@@ -41,6 +41,9 @@ let swiper: Swiper;
 useSwiper(mySwiper, {
     slidesPerView: 'auto',
     centeredSlides: true,
+    mousewheel: true,
+    grabCursor: true,
+    updateOnWindowResize: true,
     init: false
 }, async (newSwiper) => {
     await promiseTimeout(250);

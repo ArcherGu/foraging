@@ -3,10 +3,10 @@ import { Swiper } from 'swiper';
 import type { SwiperOptions } from 'swiper';
 import { watch } from 'vue';
 // Import Swiper and modules
-import SwiperCore, { Autoplay } from 'swiper/core';
+import SwiperCore, { Autoplay, Mousewheel } from 'swiper/core';
 
 // Install modules
-SwiperCore.use([Autoplay]);
+SwiperCore.use([Autoplay, Mousewheel]);
 
 type Callback = (swiper: Swiper) => any;
 
