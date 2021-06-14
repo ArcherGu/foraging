@@ -55,5 +55,6 @@ const emit = defineEmit(['random', "add"]);
 <style>
 .foraging-footer {
     max-width: 74ch;
+    position: relative;
 }
 </style>

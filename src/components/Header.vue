@@ -1,10 +1,9 @@
 <template>
     <div
         class="foraging-header"
-        position="fixed top-0 left-0 right-0 flex"
+        position="flex"
         :h="height"
         bg="purple-500"
-        z="99"
         items="center"
         justify="center"
     >
@@ -26,5 +25,7 @@ setTimeout(() => {
 <style>
 .foraging-header {
     transition: all 0.5s ease-in-out;
+    position: relative;
+    z-index: 99;
 }
 </style>

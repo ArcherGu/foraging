@@ -1,40 +1,39 @@
 <template>
-    <div h="full">
-        <div
-            class="plan-card"
-            bg="light-200"
-            border="1 rounded-3xl"
-            h="full"
-            w="xs sm:sm md:md lg:lg xl:xl"
-            shadow="xl"
+    <div
+        class="plan-card"
+        bg="light-200"
+        border="1 rounded-3xl"
+        h="full"
+        w="xs sm:sm md:md lg:lg xl:xl"
+        shadow="xl"
+        position="relative"
+    >
+        <transition-group
+            name="fade"
+            enter-active-class="animate__animated animate__fadeIn"
+            leave-active-class="animate__animated animate__fadeOut"
+            mode="out-in"
         >
-            <transition-group
-                name="fade"
-                enter-active-class="animate__animated animate__fadeIn"
-                leave-active-class="animate__animated animate__fadeOut"
-                mode="out-in"
-            >
-                <PlanEditor
-                    v-if="isEdit"
-                    :plan="plan"
-                    key="editor"
+            <PlanEditor
+                v-if="isEdit"
+                :plan="plan"
+                key="editor"
+                @delete="deletePlan"
+                @cancel="cancelEdit"
+                @confirm="confirmEdit"
+            />
+
+            <div v-else key="viewer" h="full" w="full">
+                <PlanViewer :plan="plan" @running="setRunning" />
+
+                <PlanCardCtrl
+                    v-show="!isRunning"
+                    position="absolute bottom-10 -right-px"
                     @delete="deletePlan"
-                    @cancel="cancelEdit"
-                    @confirm="confirmEdit"
+                    @edit="editPlan"
                 />
-
-                <div v-else key="viewer" h="full" w="full">
-                    <PlanViewer :plan="plan" @running="setRunning" />
-
-                    <PlanCardCtrl
-                        v-show="!isRunning"
-                        position="absolute bottom-10 right-0"
-                        @delete="deletePlan"
-                        @edit="editPlan"
-                    />
-                </div>
-            </transition-group>
-        </div>
+            </div>
+        </transition-group>
     </div>
 </template>
 

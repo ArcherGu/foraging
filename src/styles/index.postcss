@@ -20,6 +20,7 @@ body,
     "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   background-color: var(--c-bg);
   --animate-duration: 0.5s;
+  overflow: hidden;
 }
 
 body.swal2-height-auto {
@@ -34,9 +35,9 @@ button:focus {
   outline: none;
 }
 
-.swiper-container {
+.main-swiper {
   z-index: 0;
-  @apply py-20;
+  height: calc(100% - 10rem);
 }
 
 .swiper-slide {

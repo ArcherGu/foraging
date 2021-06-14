@@ -4,15 +4,20 @@
 
         <Empty v-if="planList.length === 0" p="x-5" />
 
-        <div v-else class="swiper-container" h="full" ref="mySwiper" p="y-20">
-            <div class="swiper-wrapper" :justify="isSwiperInit ? '' : 'center'">
+        <div v-show="planList.length > 0" class="swiper-container main-swiper" ref="mySwiper">
+            <div class="swiper-wrapper">
                 <transition-group
                     name="fade"
                     enter-active-class="animate__animated animate__fadeInUpBig"
                     leave-active-class="animate__animated animate__fadeOutDownBig"
                     mode="out-in"
                 >
-                    <div v-for="plan in planList" class="swiper-slide" :key="plan.id">
+                    <div
+                        v-for="plan in planList"
+                        class="swiper-slide"
+                        :key="plan.id"
+                        w="xs sm:sm md:md lg:lg xl:xl"
+                    >
                         <PlanCard :plan="plan" @delete="deletePlan" @save="savePlan" />
                     </div>
                 </transition-group>
@@ -47,11 +52,9 @@ useSwiper(mySwiper, {
     spaceBetween: 30,
     init: false
 }, async (newSwiper) => {
-    isSwiperInit.value = false;
-    await promiseTimeout(500);
+    await promiseTimeout(250);
     swiper = newSwiper;
     swiper.init();
-    isSwiperInit.value = true;
 });
 
 const { planList, save } = usePlanList(async () => {
@@ -66,6 +69,7 @@ const addPlan = () => {
     planList.value.unshift({
         id: uuidv4(),
         name: "",
+        type: 'Breakfast',
         item: []
     });
 }
