@@ -6,21 +6,14 @@
 
         <div v-show="planList.length > 0" class="swiper-container main-swiper" ref="mySwiper">
             <div class="swiper-wrapper">
-                <transition-group
-                    name="fade"
-                    enter-active-class="animate__animated animate__fadeInUpBig"
-                    leave-active-class="animate__animated animate__fadeOutDownBig"
-                    mode="out-in"
+                <div
+                    v-for="plan in planList"
+                    class="swiper-slide"
+                    :key="plan.id"
+                    w="xs sm:sm md:md lg:lg xl:xl"
                 >
-                    <div
-                        v-for="plan in planList"
-                        class="swiper-slide"
-                        :key="plan.id"
-                        w="xs sm:sm md:md lg:lg xl:xl"
-                    >
-                        <PlanCard :plan="plan" @delete="deletePlan" @save="savePlan" />
-                    </div>
-                </transition-group>
+                    <PlanCard :plan="plan" @delete="deletePlan" @save="savePlan" />
+                </div>
             </div>
         </div>
 
@@ -44,12 +37,10 @@ onMounted(() => {
 
 const mySwiper = ref();
 let swiper: Swiper;
-const isSwiperInit = ref(false);
 
 useSwiper(mySwiper, {
     slidesPerView: 'auto',
     centeredSlides: true,
-    spaceBetween: 30,
     init: false
 }, async (newSwiper) => {
     await promiseTimeout(250);
