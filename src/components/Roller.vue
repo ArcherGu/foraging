@@ -52,9 +52,11 @@ const height = ref(0);
 const itemsDeg: any[] = [];
 watch(
     roller,
-    () => {
+    async () => {
         const el = unrefElement(roller) as HTMLElement;
         if (!el) return;
+
+        await promiseTimeout(500)
 
         const rollerItemEls = Array.from(el.getElementsByClassName('roller-item'));
         if (rollerItemEls.length > 0) {
@@ -146,6 +148,8 @@ watch(
     display: flex;
     align-items: center;
     width: calc(100% - 8px);
+    height: calc(100% - 8px);
+    top: 4px;
     margin-left: auto;
     margin-right: auto;
     transform-style: preserve-3d;
