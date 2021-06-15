@@ -1,6 +1,6 @@
 <template>
     <div class="plan-viewer" h="full" w="full" p="6">
-        <div h="1/4" position="flex" items="center">
+        <div h="1/4" position="flex relative" items="center" z="15" bg="light-200">
             <div text="5xl" m="r-2">
                 <noto-v1-bread v-if="plan.type === 'Breakfast'" />
                 <noto-v1-hamburger v-else-if="plan.type === 'Lunch'" />
@@ -23,15 +23,24 @@
             </div>
         </div>
 
-        <div class="swiper-container random-swiper" ref="randomSwiper" p="y-20" position="relative">
-            <div class="swiper-wrapper">
-                <div v-for="item in plan.item" class="swiper-slide" :key="item.name">
-                    <span text="3xl">{{ item.name }}</span>
-                </div>
-            </div>
-        </div>
+        <Roller
+            v-if="plan.item.length > 0"
+            :trigger="trigger"
+            :items="plan.item"
+            @finished="handleFinished"
+            p="y-20"
+            position="relative"
+        />
 
-        <div class="random-ctrl" position="flex" items="center" justify="center" w="full">
+        <div
+            class="random-ctrl"
+            position="flex relative"
+            items="center"
+            justify="center"
+            w="full"
+            z="15"
+            bg="light-200"
+        >
             <button class="btn" bg="purple-500" @click="randomIt" :disabled="isRunning">
                 <ph-play-bold v-show="!isRunning" />
 
@@ -42,13 +51,9 @@
 </template>
 
 <script setup lang="ts">
-import random from "random";
-import { Swiper } from "swiper";
 import type { PropType } from "vue";
 import { defineProps, defineEmit, ref, watch, computed } from "vue";
-import { useSwiper } from "../composition/useSwiper";
 import type { Plan } from "../types";
-import { promiseTimeout } from "@vueuse/core";
 import Swal from 'sweetalert2';
 
 const props = defineProps({
@@ -58,51 +63,23 @@ const props = defineProps({
     }
 });
 
-const emit = defineEmit(['running'])
-
-const randomSwiper = ref();
-let swiper: Swiper;
-useSwiper(randomSwiper, {
-    slidesPerView: 'auto',
-    centeredSlides: true,
-    loop: true,
-    direction: 'vertical',
-    allowTouchMove: false,
-    autoplay: {
-        delay: 50,
-        disableOnInteraction: false,
-    },
-    init: false
-}, async (newSwiper) => {
-    await promiseTimeout(500);
-    swiper = newSwiper;
-    swiper.init();
-    swiper.autoplay.stop();
-});
+const emit = defineEmit(['running']);
 
 const isRunning = ref(false);
-const randomIt = async () => {
+const trigger = ref(new Date());
+const randomIt = () => {
     if (isRunning.value) {
         return;
     }
-
+    trigger.value = new Date();
     isRunning.value = true;
+}
 
-    swiper.autoplay.start();
-
-    const randomTime = random.int(5, 10);
-
-    await promiseTimeout(randomTime * 1000)
-
-    swiper.autoplay.stop();
-
+const handleFinished = (name: string) => {
     isRunning.value = false;
-
-    const index = swiper.activeIndex % props.plan.item.length;
-    const chosedItem = props.plan.item[index];
-
+    const chosedItem = props.plan.item.find(e => e.name === name);
     return Swal.fire({
-        title: chosedItem.name + " 🎉",
+        title: chosedItem?.name + " 🎉",
         text: props.plan.name,
         icon: 'success',
         showCancelButton: false,

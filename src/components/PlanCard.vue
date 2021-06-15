@@ -29,6 +29,7 @@
                 <PlanCardCtrl
                     v-show="!isRunning"
                     position="absolute bottom-10 -right-px"
+                    z="16"
                     @delete="deletePlan"
                     @edit="editPlan"
                 />
