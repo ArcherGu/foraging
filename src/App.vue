@@ -37,6 +37,7 @@ onMounted(() => {
 
 const mySwiper = ref();
 let swiper: Swiper;
+let needTofirst = false;
 
 useSwiper(mySwiper, {
     slidesPerView: 'auto',
@@ -54,7 +55,11 @@ useSwiper(mySwiper, {
 const { planList, save } = usePlanList(async () => {
     await nextTick();
     swiper?.update();
-    swiper?.slideTo(0, 1000);
+    if (needTofirst) {
+        swiper?.slideTo(0, 1000);
+        needTofirst = false;
+    }
+
 });
 
 const isEmpty = computed(() => planList.value.length === 0);
@@ -66,6 +71,8 @@ const addPlan = () => {
         type: 'Breakfast',
         item: []
     });
+
+    needTofirst = true;
 }
 
 const deletePlan = (id: string) => {
@@ -87,7 +94,10 @@ const savePlan = (plan: Plan) => {
 
 const getRandomPlan = () => {
     if (!swiper || planList.value.length === 0) return;
-    const randomIndex = random.int(0, planList.value.length - 1);
+    let randomIndex = swiper.activeIndex;
+    while (randomIndex == swiper.activeIndex) {
+        randomIndex = random.int(0, planList.value.length - 1);
+    }
     swiper.slideTo(randomIndex, 1000);
 }
 
