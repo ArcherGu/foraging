@@ -8,7 +8,7 @@
     shadow="xl"
     position="relative"
   >
-    <transition-group
+    <transition
       name="fade"
       enter-active-class="animate__animated animate__fadeIn"
       leave-active-class="animate__animated animate__fadeOut"
@@ -34,7 +34,7 @@
           @edit="editPlan"
         />
       </div>
-    </transition-group>
+    </transition>
   </div>
 </template>
 
