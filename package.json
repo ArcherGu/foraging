@@ -12,7 +12,7 @@
     "animate.css": "^4.1.1",
     "random": "^4.1.0",
     "sweetalert2": "11.0.16",
-    "swiper": "^6.7.0",
+    "swiper": "^11.0.6",
     "uuid": "^9.0.0",
     "vue": "^3.2.47",
     "vue-multiselect": "^3.0.0-alpha.2"

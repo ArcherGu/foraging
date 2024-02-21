@@ -4,7 +4,7 @@
 
     <Empty v-if="planList.length === 0" p="x-5" />
 
-    <div v-show="planList.length > 0" class="swiper-container main-swiper" ref="mySwiper">
+    <div v-show="planList.length > 0" class="main-swiper" ref="mySwiper">
       <div class="swiper-wrapper">
         <div v-for="plan in planList" class="swiper-slide" :key="plan.id" w="xs sm:sm md:md lg:lg xl:xl">
           <PlanCard :plan="plan" @delete="deletePlan" @save="savePlan" />
@@ -37,6 +37,7 @@ let needTofirst = false
 useSwiper(
   mySwiper,
   {
+    spaceBetween: 20,
     slidesPerView: 'auto',
     centeredSlides: true,
     mousewheel: true,

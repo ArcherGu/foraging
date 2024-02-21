@@ -1,6 +1,6 @@
 import 'animate.css'
 import 'windi.css'
-import 'swiper/swiper-bundle.min.css'
+import 'swiper/css';
 import 'sweetalert2/dist/sweetalert2.min.css'
 import './styles/index.postcss'
 import { createApp } from 'vue'
