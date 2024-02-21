@@ -32,7 +32,7 @@ onMounted(() => {
 
 const mySwiper = ref()
 let swiper: Swiper
-let needTofirst = false
+let needToFirst = false
 
 useSwiper(
   mySwiper,
@@ -52,9 +52,9 @@ useSwiper(
 const { planList, save } = usePlanList(async () => {
   await nextTick()
   swiper?.update()
-  if (needTofirst) {
+  if (needToFirst) {
     swiper?.slideTo(0, 1000)
-    needTofirst = false
+    needToFirst = false
   }
 })
 
@@ -68,7 +68,7 @@ const addPlan = () => {
     item: [],
   })
 
-  needTofirst = true
+  needToFirst = true
 }
 
 const deletePlan = (id: string) => {
