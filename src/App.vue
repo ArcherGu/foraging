@@ -39,9 +39,7 @@ useSwiper(
   {
     slidesPerView: 'auto',
     centeredSlides: true,
-    mousewheel: true,
     grabCursor: true,
-    updateOnWindowResize: true,
     init: false,
   },
   async (newSwiper) => {
