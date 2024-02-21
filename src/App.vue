@@ -67,15 +67,17 @@ const addPlan = () => {
     type: 'Breakfast',
     item: [],
   })
+  swiper.update()
 
   needToFirst = true
+
 }
 
 const deletePlan = (id: string) => {
   const index = planList.value.findIndex((e) => e.id === id)
   if (index > -1) {
-    swiper.removeSlide(index)
     planList.value.splice(index, 1)
+    swiper.update()
   }
 
   save()
@@ -84,6 +86,7 @@ const deletePlan = (id: string) => {
 const savePlan = (plan: Plan) => {
   const index = planList.value.findIndex((e) => e.id === plan.id)
   planList.value.splice(index, 1, plan)
+  swiper.update()
 
   save()
 }

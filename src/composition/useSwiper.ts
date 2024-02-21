@@ -1,4 +1,4 @@
-import { MaybeElementRef, tryOnUnmounted, unrefElement, useEventListener } from '@vueuse/core'
+import { MaybeElementRef, tryOnUnmounted, unrefElement } from '@vueuse/core'
 import { Swiper } from 'swiper'
 import { watch } from 'vue'
 import { SwiperOptions } from 'swiper/types/swiper-options'
@@ -20,8 +20,6 @@ export function useSwiper(target: MaybeElementRef, options: SwiperOptions, initC
   })
 
   tryOnUnmounted(() => swiper?.destroy())
-
-  useEventListener('resize', () => swiper?.update())
 
   return {
     swiper
