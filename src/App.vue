@@ -18,17 +18,13 @@
 
 <script setup lang="ts">
 import { Swiper } from 'swiper'
-import { computed, nextTick, ref, onMounted } from 'vue'
+import { computed, nextTick, ref } from 'vue'
 import random from 'random'
 import { v4 as uuidv4 } from 'uuid'
 import { usePlanList } from './composition/usePlanList'
 import { useSwiper } from './composition/useSwiper'
 import type { Plan } from './types'
 import { promiseTimeout } from '@vueuse/core'
-import { registerSW } from 'virtual:pwa-register'
-onMounted(() => {
-  registerSW()
-})
 
 const mySwiper = ref()
 let swiper: Swiper

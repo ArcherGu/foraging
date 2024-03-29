@@ -27,6 +27,7 @@ export default defineConfig({
     ViteWindiCSS(),
 
     VitePWA({
+      injectRegister: 'auto',
       registerType: 'autoUpdate',
       manifest: {
         name: 'Foraging',
@@ -34,20 +35,21 @@ export default defineConfig({
         theme_color: '#8b5cf6',
         icons: [
           {
-            src: '/pwa-250x250.png',
-            sizes: '250x250',
-            type: 'image/png',
-          },
-          {
-            src: '/pwa-300x300.png',
+            src: '/300x300.png',
             sizes: '300x300',
             type: 'image/png',
-          },
+          }
+        ],
+      },
+      workbox: {
+        disableDevLogs: true,
+        runtimeCaching: [
           {
-            src: '/pwa-300x300.png',
-            sizes: '300x300',
-            type: 'image/png',
-            purpose: 'maskable any',
+            urlPattern: /(.*?)\.(png|jpe?g|svg|gif|bmp|psd|tiff|tga|eps|ico|webp)/i,
+            handler: 'CacheFirst',
+            options: {
+              cacheName: 'image-cache',
+            },
           },
         ],
       },
